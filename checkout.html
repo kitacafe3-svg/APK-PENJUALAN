@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Kelompok 6 Cafe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Checkout</h1>
+
+<div class="keranjang">
+    <h2>Detail Belanja</h2>
+    <ul id="listKeranjang"></ul>
+    <h3>Total: Rp <span id="totalCheckout">0</span></h3>
+    <button onclick="kembali()">Kembali</button>
+</div>
+
+<script>
+const cart = JSON.parse(localStorage.getItem('cart'));
+const total = localStorage.getItem('total');
+
+const listKeranjang = document.getElementById('listKeranjang');
+for(const item in cart){
+    if(cart[item] > 0){
+        const li = document.createElement('li');
+        li.innerText = `${item} x ${cart[item]}`;
+        listKeranjang.appendChild(li);
+    }
+}
+document.getElementById('totalCheckout').innerText = total;
+
+function kembali(){
+    window.location.href = 'index.html';
+}
+</script>
+
+</body>
+</html>

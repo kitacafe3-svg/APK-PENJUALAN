@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kelompok 6 Cafe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>KELOMPOK 6 CAFE</h1>
+
+<!-- Produk Makanan -->
+<div class="produk">
+    <div class="judul-produk">
+        <h2>Daftar Menu Makanan</h2>
+        <img src="makanan.png" alt="Makanan" class="stiker-img">
+    </div>
+
+    <div class="item">
+        <span class="nama">Nasi Goreng</span>
+        <div class="kontrol">
+            <span class="harga">Rp 15.000</span>
+            <div class="qty">
+                <button onclick="kurang('Nasigoreng', 15000)">-</button>
+                <span id="qty-Nasigoreng">0</span>
+                <button onclick="tambah('Nasigoreng', 15000)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <span class="nama">Ayam Geprek</span>
+        <div class="kontrol">
+            <span class="harga">Rp 18.000</span>
+            <div class="qty">
+                <button onclick="kurang('AyamGeprek', 18000)">-</button>
+                <span id="qty-AyamGeprek">0</span>
+                <button onclick="tambah('AyamGeprek', 18000)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <span class="nama">Mie Goreng</span>
+        <div class="kontrol">
+            <span class="harga">Rp 13.000</span>
+            <div class="qty">
+                <button onclick="kurang('MieGoreng', 13000)">-</button>
+                <span id="qty-MieGoreng">0</span>
+                <button onclick="tambah('MieGoreng', 13000)">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Produk Snack -->
+<div class="produk">
+    <div class="judul-produk">
+        <h2>Daftar Menu Snack</h2>
+        <img src="snacks.png" alt="Snack" class="stiker-img">
+    </div>
+
+    <div class="item">
+        <span class="nama">Kentang Goreng</span>
+        <div class="kontrol">
+            <span class="harga">Rp 10.000</span>
+            <div class="qty">
+                <button onclick="kurang('Kentang', 10000)">-</button>
+                <span id="qty-Kentang">0</span>
+                <button onclick="tambah('Kentang', 10000)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <span class="nama">Tahu Crispy</span>
+        <div class="kontrol">
+            <span class="harga">Rp 8.000</span>
+            <div class="qty">
+                <button onclick="kurang('Tahu', 8000)">-</button>
+                <span id="qty-Tahu">0</span>
+                <button onclick="tambah('Tahu', 8000)">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Produk Minuman -->
+<div class="produk">
+    <div class="judul-produk">
+        <h2>Daftar Menu Minuman</h2>
+        <img src="minuman.png" alt="Minuman" class="stiker-img">
+    </div>
+
+    <div class="item">
+        <span class="nama">Kopi Susu</span>
+        <div class="kontrol">
+            <span class="harga">Rp 12.000</span>
+            <div class="qty">
+                <button onclick="kurang('KopiSusu', 12000)">-</button>
+                <span id="qty-KopiSusu">0</span>
+                <button onclick="tambah('KopiSusu', 12000)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <span class="nama">Es Teh Manis</span>
+        <div class="kontrol">
+            <span class="harga">Rp 5.000</span>
+            <div class="qty">
+                <button onclick="kurang('EsTeh', 5000)">-</button>
+                <span id="qty-EsTeh">0</span>
+                <button onclick="tambah('EsTeh', 5000)">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="keranjang">
+    <h2>Total Belanja</h2>
+    <h3>Rp <span id="total">0</span></h3>
+    <button onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+let total = 0;
+const cart = {
+    Nasigoreng: 0,
+    AyamGeprek: 0,
+    MieGoreng: 0,
+    Kentang: 0,
+    Tahu: 0,
+    KopiSusu: 0,
+    EsTeh: 0
+};
+
+function tambah(nama, harga){
+    cart[nama] += 1;
+    total += harga;
+    document.getElementById('qty-' + nama).innerText = cart[nama];
+    document.getElementById('total').innerText = total;
+}
+
+function kurang(nama, harga){
+    if(cart[nama] > 0){
+        cart[nama] -= 1;
+        total -= harga;
+        document.getElementById('qty-' + nama).innerText = cart[nama];
+        document.getElementById('total').innerText = total;
+    }
+}
+
+function checkout(){
+    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('total', total);
+    window.location.href = 'checkout.html';
+}
+</script>
+
+</body>
+</html>
